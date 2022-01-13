@@ -29,7 +29,7 @@ function DashboardController( dashboardService, $mdSidenav, $mdBottomSheet, $log
           self.selected = payload.data[0];
 
           dashboardService
-            .loadContainers(self.selected.status.addresses[0].address)
+            .loadContainers(self.selected.metadata.name)
             .then(function(payload) {
                 self.containers = payload.data
             });
@@ -57,7 +57,7 @@ function DashboardController( dashboardService, $mdSidenav, $mdBottomSheet, $log
     self.selected = angular.isNumber(node) ? $scope.nodes[node] : node;
 
     dashboardService
-        .loadContainers(node.status.addresses[0].address)
+        .loadContainers(node.metadata.name)
         .then(function(payload) {
             self.containers = payload.data
         });

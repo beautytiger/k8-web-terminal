@@ -30805,7 +30805,7 @@ $__System.register("d", [], function (_export) {
 
       self.selected = payload.data[0];
 
-      dashboardService.loadContainers(self.selected.status.addresses[0].address).then(function (payload) {
+      dashboardService.loadContainers(self.selected.metadata.name).then(function (payload) {
         self.containers = payload.data;
       });
     });
@@ -30831,7 +30831,7 @@ $__System.register("d", [], function (_export) {
 
       self.selected = angular.isNumber(node) ? $scope.nodes[node] : node;
 
-      dashboardService.loadContainers(node.status.addresses[0].address).then(function (payload) {
+      dashboardService.loadContainers(node.metadata.name).then(function (payload) {
         self.containers = payload.data;
       });
 

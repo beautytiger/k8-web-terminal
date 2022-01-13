@@ -1,10 +1,10 @@
 package routers
 
 import (
-	"k8-web-terminal/controllers"
 	"github.com/astaxie/beego"
-
+	"k8-web-terminal/controllers"
 )
+
 //api/nodes/containers?node=172.16.0.143
 func init() {
 	beego.Include(&controllers.MainController{})

@@ -1,10 +1,9 @@
 package main
 
 import (
-	_ "k8-web-terminal/routers"
 	"github.com/astaxie/beego"
 	_ "k8-web-terminal/controllers"
-
+	_ "k8-web-terminal/routers"
 )
 
 func main() {
@@ -12,4 +11,3 @@ func main() {
 	beego.SetStaticPath("/public", "./static")
 	beego.Run()
 }
-

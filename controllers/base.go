@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"os"
+	"flag"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
-	"flag"
-	"path/filepath"
 	"k8s.io/client-go/tools/clientcmd"
+	"os"
+	"path/filepath"
 )
 
 var Clientset *kubernetes.Clientset
@@ -24,13 +24,13 @@ func init() {
 	var kubeconfig *string
 	if home := homeDir(); home != "" {
 		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) absolute path to the kubeconfig file")
-	}else {
+	} else {
 		kubeconfig = flag.String("kubeconfig", "", "(optional) absolute path to the kubeconfig file")
 	}
 	flag.Parse()
 
 	//在 kubeconfig 中使用当前上下文环境，config 获取支持 url 和 path 方式
-	Config, err =rest.InClusterConfig()
+	Config, err = rest.InClusterConfig()
 	if err != nil {
 		Config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
 		if err != nil {
@@ -40,24 +40,22 @@ func init() {
 		if err != nil {
 			panic(err.Error())
 		}
-	}else {
+	} else {
 		Clientset, err = kubernetes.NewForConfig(Config)
 		if err != nil {
 			panic(err.Error())
 		}
 	}
 
-
-   ////  集群内方式
+	////  集群内方式
 	//Config, err = rest.InClusterConfig()
 	//if err != nil {
 	//	panic(err.Error())
 	//}
-   //
+	//
 	//Clientset, err = kubernetes.NewForConfig(Config)
 	//if err != nil {
 	//	panic(err.Error())
 	//}
-
 
 }
